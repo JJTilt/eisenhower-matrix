@@ -97,9 +97,9 @@ with col1:
     }
 
     # Background zones
-    ax.add_patch(patches.Rectangle((3.5, 3.5), 2.5, 2.5, color=colors['Do']))
-    ax.add_patch(patches.Rectangle((0, 3.5), 2.5, 2.5, color=colors['Delegate']))
-    ax.add_patch(patches.Rectangle((3.5, 0), 2.5, 2.5, color=colors['Schedule']))
+    ax.add_patch(patches.Rectangle((2.5, 2.5), 2.5, 2.5, color=colors['Do']))
+    ax.add_patch(patches.Rectangle((0, 2.5), 2.5, 2.5, color=colors['Delegate']))
+    ax.add_patch(patches.Rectangle((2.5, 0), 2.5, 2.5, color=colors['Schedule']))
     ax.add_patch(patches.Rectangle((0, 0), 2.5, 2.5, color=colors['Eliminate']))
 
     # Plot tasks
