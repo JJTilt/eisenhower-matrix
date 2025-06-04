@@ -16,14 +16,6 @@
 
 # ==================================================================
 
-if "initialized" not in st.session_state:
-    st.session_state.initialized = True
-    st.session_state.tasks = []  # reset on new session
-else:
-    if "tasks" not in st.session_state:
-        st.session_state.tasks = []
-
-
 # eisenhower_matrix.py
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -33,6 +25,15 @@ import json
 
 st.set_page_config(layout="wide")
 st.title("📊 Eisenhower Matrix – Weekly Task Planner")
+
+
+if "initialized" not in st.session_state:
+    st.session_state.initialized = True
+    st.session_state.tasks = []  # reset on new session
+else:
+    if "tasks" not in st.session_state:
+        st.session_state.tasks = []
+
 
 # File to store task data
 TASK_FILE = "tasks.json"
