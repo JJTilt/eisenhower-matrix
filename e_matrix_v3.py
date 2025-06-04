@@ -8,11 +8,20 @@
 
 # 3. Load saved tasks on next startup
 
-# Update v3, 
+# Update v31, 
 
 # Clear all tasks on each new app session
 
 # Keep manual save/load available
+
+
+# V32
+
+# 1. Updated rating scale:
+# Importance and Urgence now go from 1 to 5 instead of 0 to 4.
+
+# 2. Prevent boundary placement:
+# Adjusted plotted values by adding a small offset to keep points away from the edges.
 
 # ==================================================================
 
@@ -63,8 +72,8 @@ def save_tasks():
 # -------------------- Input Form --------------------
 with st.form("task_form"):
     name = st.text_input("Task Name")
-    importance = st.slider("Importance", 0, 4)
-    urgency = st.slider("Urgence", 0, 4)
+    importance = st.slider("Importance", 1, 5)
+    urgency = st.slider("Urgence", 1, 5)
     submitted = st.form_submit_button("Add Task")
 
     if submitted:
@@ -95,8 +104,10 @@ with col1:
 
     # Plot tasks
     for name, i, u in st.session_state.tasks:
-        ax.scatter(i, u, c='blue', s=100, edgecolors='black')
-        ax.text(i, u, name, fontsize=9, ha='center', va='center')
+        x = i - 0.2 if i >= 4.5 else i + 0.2
+        y = u - 0.2 if u >= 4.5 else u + 0.2
+        ax.scatter(x, y, c='blue', s=100, edgecolors='black')
+        ax.text(x, y, name, fontsize=9, ha='center', va='center')
 
     ax.set_xlim(0, 4)
     ax.set_ylim(0, 4)
@@ -113,6 +124,11 @@ with col1:
     ax.text(1, 3.8, 'Delegate', fontsize=10, ha='center', fontweight='bold')
     ax.text(3, 0.2, 'Schedule', fontsize=10, ha='center', fontweight='bold')
     ax.text(1, 0.2, 'Eliminate', fontsize=10, ha='center', fontweight='bold')
+
+    ax.set_xlim(0.5, 5.5)
+    ax.set_ylim(0.5, 5.5)
+    ax.set_xticks(range(1, 6))
+    ax.set_yticks(range(1, 6))
 
     # Save matrix image
     fig.savefig("eisenhower_matrix.png")
