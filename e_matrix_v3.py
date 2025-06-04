@@ -129,6 +129,11 @@ with col1:
     ax.set_ylim(0, 5)
     ax.set_xticks(range(1, 5))
     ax.set_yticks(range(1, 5))
+    
+    # Add Arrow on both axies
+    ax.annotate('', xy=(5.5, 0), xytext=(0, 0), arrowprops=dict(arrowstyle='->'))  # X axis
+    ax.annotate('', xy=(0, 5.5), xytext=(0, 0), arrowprops=dict(arrowstyle='->'))  # Y axis
+
 
     # Save matrix image
     fig.savefig("eisenhower_matrix.png")
