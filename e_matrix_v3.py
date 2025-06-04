@@ -14,9 +14,11 @@ Updated function
 import streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-
 import os
 import json
+
+st.set_page_config(layout="wide")
+st.title("📊 Eisenhower Matrix – Weekly Task Planner")
 
 # File to store task data
 TASK_FILE = "tasks.json"
@@ -29,14 +31,12 @@ if "tasks" not in st.session_state:
     else:
         st.session_state.tasks = []
 
+# Save tasks to file
+def save_tasks():
+    with open(TASK_FILE, "w") as f:
+        json.dump(st.session_state.tasks, f)
 
-st.set_page_config(layout="wide")
-st.title("📊 Eisenhower Matrix – Weekly Task Planner")
-
-if "tasks" not in st.session_state:
-    st.session_state.tasks = []
-
-# Input form
+# -------------------- Input Form --------------------
 with st.form("task_form"):
     name = st.text_input("Task Name")
     importance = st.slider("Importance", 0, 4)
@@ -46,13 +46,14 @@ with st.form("task_form"):
     if submitted:
         if name:
             st.session_state.tasks.append([name, importance, urgency])
+            save_tasks()
         else:
             st.warning("Please enter a task name.")
 
-# Layout: left = matrix, right = list
+# -------------------- Layout --------------------
 col1, col2 = st.columns([2, 1])
 
-# ---------- MATRIX DISPLAY ----------
+# ---------- Eisenhower Matrix ----------
 with col1:
     fig, ax = plt.subplots(figsize=(6, 6))
     colors = {
@@ -62,7 +63,7 @@ with col1:
         'Eliminate': 'lightgrey'
     }
 
-    # Draw matrix background
+    # Background zones
     ax.add_patch(patches.Rectangle((2, 2), 2, 2, color=colors['Do']))
     ax.add_patch(patches.Rectangle((0, 2), 2, 2, color=colors['Delegate']))
     ax.add_patch(patches.Rectangle((2, 0), 2, 2, color=colors['Schedule']))
@@ -83,22 +84,22 @@ with col1:
     ax.set_aspect('equal')
     ax.grid(True)
 
-    # Quadrant labels
+    # Labels
     ax.text(3, 3.8, 'Do', fontsize=10, ha='center', fontweight='bold')
     ax.text(1, 3.8, 'Delegate', fontsize=10, ha='center', fontweight='bold')
     ax.text(3, 0.2, 'Schedule', fontsize=10, ha='center', fontweight='bold')
     ax.text(1, 0.2, 'Eliminate', fontsize=10, ha='center', fontweight='bold')
 
-    st.pyplot(fig)
-
-    # Save matrix plot as image
+    # Save matrix image
     fig.savefig("eisenhower_matrix.png")
 
+    # Show image download button
     with open("eisenhower_matrix.png", "rb") as f:
-    st.download_button("📥 Download Matrix Image", f, file_name="eisenhower_matrix.png")
+        st.download_button("📥 Download Matrix Image", f, file_name="eisenhower_matrix.png")
 
+    st.pyplot(fig)
 
-# ---------- TASK LIST + DELETE ----------
+# ---------- Task List and Delete ----------
 with col2:
     st.subheader("🗂 Task List")
     for i, task in enumerate(st.session_state.tasks):
@@ -108,10 +109,5 @@ with col2:
         with col_del:
             if st.button("❌", key=f"del_{i}"):
                 st.session_state.tasks.pop(i)
+                save_tasks()
                 st.experimental_rerun()
-                
-# Save tasks to file after changes
-def save_tasks():
-    with open(TASK_FILE, "w") as f:
-        json.dump(st.session_state.tasks, f)
-
