@@ -125,10 +125,10 @@ with col1:
     ax.text(3, 0.2, 'Schedule', fontsize=10, ha='center', fontweight='bold')
     ax.text(1, 0.2, 'Eliminate', fontsize=10, ha='center', fontweight='bold')
 
-    ax.set_xlim(0.5, 5.5)
-    ax.set_ylim(0.5, 5.5)
-    ax.set_xticks(range(1, 6))
-    ax.set_yticks(range(1, 6))
+    ax.set_xlim(0, 5)
+    ax.set_ylim(0, 5)
+    ax.set_xticks(range(1, 5))
+    ax.set_yticks(range(1, 5))
 
     # Save matrix image
     fig.savefig("eisenhower_matrix.png")
