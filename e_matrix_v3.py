@@ -134,10 +134,10 @@ with col1:
     arrow_style = dict(arrowstyle='->', linewidth=2, mutation_scale=20)
 
     # X axis arrow
-    ax.annotate('', xy=(5.1, 0), xytext=(0, 0), arrowprops=arrow_style)
+    ax.annotate('', xy=(5.0, 0), xytext=(0, 0), arrowprops=arrow_style)
 
     # Y axis arrow
-    ax.annotate('', xy=(0, 5.1), xytext=(0, 0), arrowprops=arrow_style)
+    ax.annotate('', xy=(0, 5.0), xytext=(0, 0), arrowprops=arrow_style)
 
 
 
