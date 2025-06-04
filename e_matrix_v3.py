@@ -7,7 +7,22 @@
 # 2. Save the matrix plot as an image (eisenhower_matrix.png)
 
 # 3. Load saved tasks on next startup
+
+# Update v3, 
+
+# Clear all tasks on each new app session
+
+# Keep manual save/load available
+
 # ==================================================================
+
+if "initialized" not in st.session_state:
+    st.session_state.initialized = True
+    st.session_state.tasks = []  # reset on new session
+else:
+    if "tasks" not in st.session_state:
+        st.session_state.tasks = []
+
 
 # eisenhower_matrix.py
 import streamlit as st
@@ -22,13 +37,22 @@ st.title("📊 Eisenhower Matrix – Weekly Task Planner")
 # File to store task data
 TASK_FILE = "tasks.json"
 
-# Load saved tasks
-if "tasks" not in st.session_state:
+# # Load saved tasks
+# if "tasks" not in st.session_state:
+#     if os.path.exists(TASK_FILE):
+#         with open(TASK_FILE, "r") as f:
+#             st.session_state.tasks = json.load(f)
+#     else:
+#         st.session_state.tasks = []
+
+if st.button("🔄 Load Saved Tasks"):
     if os.path.exists(TASK_FILE):
         with open(TASK_FILE, "r") as f:
             st.session_state.tasks = json.load(f)
+        st.success("Tasks loaded from file.")
     else:
-        st.session_state.tasks = []
+        st.warning("No saved tasks found.")
+
 
 # Save tasks to file
 def save_tasks():
