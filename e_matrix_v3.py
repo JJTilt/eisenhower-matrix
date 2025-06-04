@@ -97,10 +97,10 @@ with col1:
     }
 
     # Background zones
-    ax.add_patch(patches.Rectangle((2, 2), 2, 2, color=colors['Do']))
-    ax.add_patch(patches.Rectangle((0, 2), 2, 2, color=colors['Delegate']))
-    ax.add_patch(patches.Rectangle((2, 0), 2, 2, color=colors['Schedule']))
-    ax.add_patch(patches.Rectangle((0, 0), 2, 2, color=colors['Eliminate']))
+    ax.add_patch(patches.Rectangle((2.5, 2.5), 2.5, 2.5, color=colors['Do']))
+    ax.add_patch(patches.Rectangle((0, 2.5), 2.5, 2.5, color=colors['Delegate']))
+    ax.add_patch(patches.Rectangle((2.5, 0), 2.5, 2.5, color=colors['Schedule']))
+    ax.add_patch(patches.Rectangle((0, 0), 2.5, 2.5, color=colors['Eliminate']))
 
     # Plot tasks
     for name, i, u in st.session_state.tasks:
