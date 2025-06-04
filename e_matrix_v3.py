@@ -120,10 +120,10 @@ with col1:
     ax.grid(True)
 
     # Labels
-    ax.text(3.5, 4.7, 'Do', fontsize=10, ha='center', fontweight='bold')
-    ax.text(1.5, 4.7, 'Delegate', fontsize=10, ha='center', fontweight='bold')
-    ax.text(3.5, 0.2, 'Schedule', fontsize=10, ha='center', fontweight='bold')
-    ax.text(1.5, 0.2, 'Eliminate', fontsize=10, ha='center', fontweight='bold')
+    ax.text(3.5, 4.5, 'Do', fontsize=10, ha='center', fontweight='bold')
+    ax.text(1.5, 4.5, 'Delegate', fontsize=10, ha='center', fontweight='bold')
+    ax.text(3.5, 0.5, 'Schedule', fontsize=10, ha='center', fontweight='bold')
+    ax.text(1.5, 0.5, 'Eliminate', fontsize=10, ha='center', fontweight='bold')
 
     ax.set_xlim(0, 5.0)
     ax.set_ylim(0, 5.0)
